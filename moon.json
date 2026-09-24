@@ -1,0 +1,9 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": [
+    "For repositories built with moon: extend `github>dougborg/renovate-config:moon` after the default preset.",
+    "moonrepo's preset updates toolchain versions in `.moon/*.yml`; the built-in proto manager already covers `.prototools`.",
+    "The tag pin is kept current by Renovate's renovate-config manager in this repository."
+  ],
+  "extends": ["github>moonrepo/moon//ecosystem/renovate#v2.5.5"]
+}

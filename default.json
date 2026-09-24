@@ -1,0 +1,45 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": [
+    "The owner's shared Renovate policy (dougborg-dot-net docs/decisions/0001-repository-baseline.md).",
+    "Every repository extends it with `github>dougborg/renovate-config` and adds only its own rules.",
+    "Every manager Renovate enables by default stays on, proto and mise included; pre-commit is turned on as well."
+  ],
+  "extends": [
+    "config:recommended",
+    ":enablePreCommit",
+    ":enableVulnerabilityAlerts",
+    "helpers:pinGitHubActionDigestsToSemver"
+  ],
+  "timezone": "America/Denver",
+  "schedule": ["before 7am on monday"],
+  "semanticCommits": "enabled",
+  "semanticCommitType": "chore",
+  "semanticCommitScope": "deps",
+  "minimumReleaseAge": "7 days",
+  "internalChecksFilter": "strict",
+  "dependencyDashboard": true,
+  "osvVulnerabilityAlerts": true,
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 7am on monday"]
+  },
+  "packageRules": [
+    {
+      "description": "Every update is `chore(deps)`, overriding config:recommended's `fix` type for production dependencies, so each commit passes the eleven-type commit lint as written.",
+      "matchPackageNames": ["*"],
+      "semanticCommitType": "chore",
+      "semanticCommitScope": "deps"
+    },
+    {
+      "description": "One pull request per manager for non-major updates.",
+      "matchUpdateTypes": ["minor", "patch", "digest", "pin", "pinDigest"],
+      "groupName": "{{manager}} non-major"
+    },
+    {
+      "description": "One pull request for every GitHub Actions update, majors included, as the Dependabot baseline did.",
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions"
+    }
+  ]
+}
