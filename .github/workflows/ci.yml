@@ -19,7 +19,7 @@ concurrency:
 jobs:
   check:
     name: check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     permissions:
       contents: read
@@ -31,7 +31,7 @@ jobs:
       # Renovate needs Node ^24.11.0.
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: "24"
+          node-version: "26"
 
       - name: Validate the presets
         run: >-
